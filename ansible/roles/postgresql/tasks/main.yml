@@ -1,0 +1,28 @@
+---
+- name: Установка PostgreSQL
+  apt:
+    name: "postgresql-{{ postgres_version }}"
+    state: present
+
+- name: Настройка postgresql.conf для мастера
+  template:
+    src: postgresql.conf.j2
+    dest: /etc/postgresql/{{ postgres_version }}/main/postgresql.conf
+  when: inventory_hostname == postgres_master
+
+- name: Настройка pg_hba.conf для мастера
+  template:
+    src: pg_hba.conf.j2
+    dest: /etc/postgresql/{{ postgres_version }}/main/pg_hba.conf
+  when: inventory_hostname == postgres_master
+
+- name: Настройка recovery.conf для реплик
+  template:
+    src: recovery.conf.j2
+    dest: /var/lib/postgresql/{{ postgres_version }}/main/recovery.conf
+  when: inventory_hostname in postgres_replicas
+
+- name: Перезапуск PostgreSQL
+  service:
+    name: postgresql
+    state: restarted

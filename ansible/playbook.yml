@@ -1,0 +1,10 @@
+---
+- name: Настройка PostgreSQL с репликацией
+  hosts: all
+  become: yes
+  vars:
+    postgres_version: 14
+    postgres_master: "{{ groups['master'][0] }}"
+    postgres_replicas: "{{ groups['replicas'] }}"
+  roles:
+    - postgresql
