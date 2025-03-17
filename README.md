@@ -24,3 +24,9 @@ terraform output server_ips
 cd ../ansible
 ansible-playbook -i inventory.ini playbook.yml
 
+```
+PLAY RECAP ******************************************************************************************************************
+postgres-server-1          : ok=5    changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+postgres-server-2          : ok=4    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+postgres-server-3          : ok=4    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+```

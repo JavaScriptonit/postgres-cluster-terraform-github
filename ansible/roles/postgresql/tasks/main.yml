@@ -1,8 +1,9 @@
 ---
 - name: Установка PostgreSQL
   apt:
-    name: "postgresql-{{ postgres_version }}"
+    name: postgresql
     state: present
+    update_cache: yes
 
 - name: Настройка postgresql.conf для мастера
   template:
